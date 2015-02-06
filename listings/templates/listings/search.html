@@ -1,0 +1,68 @@
+{% extends 'listings/base.html' %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static 'listings/assets/fancybox/jquery.fancybox.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li><a href="/listings/">Listings</a></li>
+        <li><a href="/listings/search/">Search</a></li>
+        <li><a href="/listings/search/{{ search_string.split|join:'-' }}">{{ search_string }}</a></li>
+    </ol>
+    <div class="container-fluid">
+
+        <div class="row pl10 pr10">
+            {% if posts %}
+                <table class="table table-bordered table-hover search-result-table">
+                    <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <td>
+                                {% if post.pictures.all.count > 0 %}
+                                    {% for picture in post.pictures.all %}
+                                        {% thumbnail picture.file "1000" as big %}
+                                            {% thumbnail picture.file "80x80" crop="center" as im %}
+                                                <a class="fancybox" href="{{ big.url }}" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+                                                    {% if forloop.counter == 1 %}
+                                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                                    {% endif %}
+                                                </a>
+                                            {% endthumbnail %}
+                                        {% endthumbnail %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="/listings/post/{{ post.id }}">{{ post.title }}</a>
+                                <p class="content">{{ post.content|slice:":300" }}</p>
+                            </td>
+                            <td class="post-table-col">
+                                <a href="/listings/date/{{ post.create_date }}">{{ post.create_date|date:"M. d, Y" }}</a> <br/>
+                                <a href="/listings/category/{{ post.category }}">{{ post.get_category_display }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>No posts founds.</p>
+                </div>
+            {% endif %}
+        </div>
+
+    </div> <!-- .container-fluid -->
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'listings/assets/fancybox/jquery.fancybox.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.fancybox').fancybox();
+        });
+    </script>
+{% endblock %}

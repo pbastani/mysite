@@ -1,0 +1,36 @@
+{% extends 'listings/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container-fluid" style="margin-top: 20px;">
+
+        <div class="row">
+            {% if posts.count > 0 %}
+                <table class="table table-striped table-bordered" cellspacing="0">
+                    <thead>
+                    <tr class="info">
+                        <th class="post-table-col">Category</th>
+                        <th>Title</th>
+                        <th class="post-table-col center-text">Post Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <td><a href="/listings/category/{{ post.category }}">{{ post.get_category_display }}</a></td>
+                            <td><a href="/listings/post/{{ post.id }}">{{ post.title }}</a></td>
+                            <td class="center-text">{{ post.create_date|date:"M. d, Y" }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>No posts founds.</p>
+                </div>
+            {% endif %}
+        </div>
+
+    </div> <!-- .container-fluid -->
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'listings/admin/base.html' %}
+{% load staticfiles %}
+{% load listings_tags %}
+
+{% block content %}
+
+    <div class="page-heading">
+        <h1>
+            {{ post.id|yesno:'Update Post,New Post' }}
+        </h1>
+    </div>
+
+    <form role="form" method="post" class="form-horizontal col-md-offset-2 col-md-8" action="/listings/myposts/edit/0/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="post-form">
+            <!-- buttons -->
+            <div class="row mb2">
+                <div class="col-md-offset-2 col-md-10">
+                    <ul class="post-btns pull-right">
+                        <li><a href="/listings/myposts/view/" class="btn btn-primary-alt btn-sm"><i class="fa fa-close"></i> Cancel</a></li>
+                        <li><button type="submit" class="btn btn-primary-alt btn-sm"><i class="fa fa-check"></i> Continue</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <input type="number" name="{{ form.id.name }}" value="{{ post.id }}" hidden="true">
+
+            <!-- title -->
+            <div class="row mb2" style="margin-bottom: 2px;">
+                <label for="{{ form.title.name }}" class="control-label col-md-2">{{ form.title.label }}</label>
+                <div class="col-md-10">
+                    {{ form.title|addcss:"form-control mb2" }}
+                </div>
+            </div>
+
+            <!-- content -->
+            <div class="row mb2">
+                <label for="{{ form.content.name }}" class="control-label col-md-2">{{ form.content.label }}</label>
+                <div class="col-md-10">
+                    {{ form.content|addcss:"form-control mb2" }}
+                </div>
+            </div>
+
+            <!-- tags -->
+            <div class="row mb2">
+                <label for="{{ form.tags.name }}" class="control-label col-md-2">{{ form.tags.label }}</label>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-tags"></i>
+                        </span>
+                        {{ form.tags|addcss:"form-control mb2" }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- price -->
+            <div class="row mb2">
+                <label for="{{ form.price.name }}" class="control-label col-md-2">{{ form.price.label }}</label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-dollar"></i>
+                        </span>
+                        {{ form.price|addcss:"form-control mb2" }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="row mb2">
+                <label for="{{ form.location.name }}" class="control-label col-md-2">{{ form.location.label }}</label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                        </span>
+                        {{ form.location|addcss:"form-control mb2" }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="row mb2">
+                <label for="{{ form.category.name }}" class="control-label col-md-2">{{ form.category.label }}</label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-list-ul"></i>
+                        </span>
+                        {{ form.category|addcss:"form-control mb2" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

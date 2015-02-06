@@ -1,0 +1,12 @@
+
+---------------- Django partial view ----------------
+# In your form template:
+{% include "form_snippet.html" %}
+
+# In form_snippet.html:
+{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+    </div>
+{% endfor %}

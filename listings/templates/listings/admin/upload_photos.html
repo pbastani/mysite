@@ -1,0 +1,99 @@
+{% extends 'listings/admin/base.html' %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static 'listings/assets/fancybox/jquery.fancybox.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-heading">
+        <h1>
+            Upload Photos
+        </h1>
+    </div>
+
+    <form role="form"
+          method="post"
+          class="form-horizontal col-md-offset-2 col-md-8"
+          action="/listings/myposts/upload/{{ post_id }}/"
+          enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <div class="post-form">
+            <input type="number" name="{{ form.id.name }}" value="{{ post_id }}" hidden="true">
+
+            <div class="pull-left" style="width: 100%;">
+                <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary-alt btn-file btn-sm">
+                        <i class="fa fa-folder-open"></i> Browse <input type="file" name="pictures" multiple style="width: 100%;">
+                    </span>
+                </span>
+                    <input type="text" class="form-control input-sm" readonly>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary-alt btn-sm"><i class="fa fa-refresh"></i> Refresh</button>
+                    <a href="/listings/myposts/publish/{{ post_id }}/" class="btn btn-primary-alt btn-sm"><i class="fa fa-check"></i> Preview</a>
+                </span>
+                </div>
+            </div>
+        </div>
+
+        {% if pictures.count > 0 %}
+            <div class="pl10 pt50">
+                {% for picture in pictures %}
+                    {% thumbnail picture.file "1000" as big %}
+                        <div class="pr10 pull-left">
+                        <div>
+                            {% thumbnail picture.file "70x70" crop="center" as im %}
+                                <a class="fancybox" href="{{ big.url }}" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+                                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                                </a>
+                            {% endthumbnail %}
+                        </div>
+                        <div class="btn-group mb10 mt5" data-toggle="buttons">
+                            <label class="btn btn-danger-alt btn-xs btn-label">
+                                <input type="checkbox" name="old_pic_delete" value="{{ picture.id }}">
+                                <i class="fa fa-trash"></i> Delete
+                            </label>
+                        </div>
+                        </div>
+                    {% endthumbnail %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info mt50">
+                <p>No pictures uploaded.</p>
+            </div>
+        {% endif %}
+    </form>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'listings/assets/fancybox/jquery.fancybox.js' %}"></script>
+
+    <script>
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready( function() {
+            $('.fancybox').fancybox();
+
+            $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+                if( input.length ) {
+                    input.val(log);
+                } else {
+                    if( log ) alert(log);
+                }
+            });
+        });
+    </script>
+{% endblock %}

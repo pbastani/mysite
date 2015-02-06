@@ -1,0 +1,103 @@
+{% extends 'listings/admin/base.html' %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% load listings_tags %}
+
+{% block css %}
+    <link href="{% static 'listings/assets/fancybox/jquery.fancybox.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'listings/assets/plugins/form-daterangepicker/daterangepicker-bs3.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="page-heading">
+        <h1>
+            Publish Post
+        </h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="panel panel-info mb10">
+                <div class="panel-heading">
+                    <h2><i class="fa fa-anchor"></i>{{ post.title }}</h2>
+                </div>
+                <div class="panel-body">
+                    {{ post.content }}
+                    <div class="mt10 mb10">
+                        {% if post.pictures.all.count > 0 %}
+                            {% for picture in post.pictures.all %}
+                                {% thumbnail picture.file "1000" as big %}
+                                    {% thumbnail picture.file "50x50" crop="center" as im %}
+                                        <a class="fancybox" href="{{ big.url }}" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+                                        </a>
+                                    {% endthumbnail %}
+                                {% endthumbnail %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer p10">
+                        <div class="row pl10">
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-dollar"></i> {{ post.price }}
+                            </div>
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-calendar"></i>
+                                {{ post.create_date|date:"M. d, Y" }}
+                            </div>
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-map-marker"></i>
+                                <a href="https://www.google.ca/maps/place/{{ post.location }}" target="_blank">{{ post.location }}</a>
+                            </div>
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-tags"></i>
+                                {% for tag in post.tags_text %}
+                                    <a href="/listings/tag/{{ tag.split|join:'-' }}/" target="_blank">​​{{ tag }}</a>
+                                    {% if forloop.revcounter > 1 %}
+                                        -
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <form role="form" method="post" action="/listings/myposts/publish/{{ post_id }}/">
+                {% csrf_token %}
+                <input type="number" name="{{ form.id.name }}" value="{{ post.id }}" hidden="true">
+                <div class="form-group pull-left date-range-form">
+                    <label class="pull-left control-label p5">Active: </label>
+                    <div class="pull-left">
+                        <div class="input-daterange input-group" id="datepicker-range">
+                            <input type="text" class="input-sm form-control date-picker" name="{{ form.create_date.name }}" value="{{ post.create_date|date:"m/d/Y" }}">
+                            <span class="input-group-addon input-sm">to</span>
+                            <input type="text" class="input-sm form-control date-picker" name="{{ form.expiry_date.name }}" value="{{ post.expiry_date|date:"m/d/Y" }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group pull-right">
+                    <a href="/listings/myposts/edit/{{ post.id }}/" class="btn btn-primary-alt btn-sm"><i class="fa fa-pencil"></i> Edit Text</a>
+                    <a href="/listings/myposts/upload/{{ post.id }}/" class="btn btn-primary-alt btn-sm"><i class="fa fa-picture-o"></i> Edit Pics</a>
+                    <button type="submit" class="btn btn-primary-alt btn-sm"><i class="fa fa-check"></i> Publish</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'listings/assets/plugins/form-colorpicker/js/bootstrap-colorpicker.min.js' %}"></script> 			<!-- Color Picker -->
+    <script src="{% static 'listings/assets/plugins/form-daterangepicker/daterangepicker.js' %}"></script>     				<!-- Date Range Picker -->
+    <script src="{% static 'listings/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js' %}"></script>      			<!-- Datepicker -->
+    <script src="{% static 'listings/assets/plugins/form-daterangepicker/moment.min.js' %}"></script>              			<!-- Moment.js for Date Range Picker -->
+    <script src="{% static 'listings/assets/demo/demo-pickers.js' %}"></script>
+    <script src="{% static 'listings/assets/fancybox/jquery.fancybox.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.fancybox').fancybox();
+        });
+    </script>
+{% endblock %}

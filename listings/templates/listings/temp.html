@@ -1,0 +1,70 @@
+{% extends 'listings/admin/base.html' %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% load listings_tags %}
+
+{% block css %}
+    <link href="{% static 'listings/assets/css/lightbox.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="page-heading">
+        <h1>
+            Publish Post
+        </h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h2><i class="fa fa-anchor"></i>{{ post.title }}</h2>
+                    </div>
+                    <div class="panel-body">
+                        {{ post.content }}
+                        <div class="mt10">
+                            {% if post.pictures.all.count > 0 %}
+                                {% for picture in post.pictures.all %}
+                                    {% thumbnail picture.file "1000" as big %}
+                                        {% thumbnail picture.file "50x50" crop="center" as im %}
+                                            <a class="example-image-link m0 p0" href="{{ big.url }}" data-lightbox="example-set" data-title="Untitled.">
+                                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                            </a>
+                                        {% endthumbnail %}
+                                    {% endthumbnail %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel-footer p10">
+                        <div class="row pl10">
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-dollar"></i> {{ post.price }}
+                            </div>
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-calendar"></i>
+                                {{ post.create_date|date:"M. d, Y" }}
+                            </div>
+                            <div class="pr20 pull-left">
+                                <i class="fa fa-map-marker"></i>
+                                <a href="https://www.google.ca/maps/place/{{ post.location }}" target="_blank">{{ post.location }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group pull-right">
+                    <a href="/listings/myposts/edit/{{ post.id }}/" class="btn btn-primary-alt btn-sm"><i class="fa fa-pencil"></i> Edit Text</a>
+                    <a href="/listings/myposts/upload/{{ post.id }}/" class="btn btn-primary-alt btn-sm"><i class="fa fa-picture-o"></i> Edit Pictures</a>
+                    <a href="/listings/myposts/publish/{{ post.id }}/" class="btn btn-primary-alt btn-sm"><i class="fa fa-ok"></i> Publish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{{% block js %}
+    <script src="{% static 'listings/assets/js/lightbox.js' %}"></script>
+{% endblock %}

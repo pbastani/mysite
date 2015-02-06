@@ -1,0 +1,635 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Avalon Admin Theme</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="description" content="Avalon Admin Theme">
+    <meta name="author" content="The Red Team">
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700' rel='stylesheet' type='text/css'>
+
+    <!--[if lt IE 10]>
+        <script src="{% static 'listings/assets/js/media.match.min.js' %}"></script>
+        <script src="{% static 'listings/assets/js/placeholder.min.js' %}"></script>
+    <![endif]-->
+
+    <link href="{% static 'listings/assets/fonts/font-awesome/css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">        <!-- Font Awesome -->
+    <link href="{% static 'listings/assets/css/styles.css' %}" type="text/css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
+
+    <link href="{% static 'listings/assets/plugins/jstree/dist/themes/avalon/style.min.css' %}" type="text/css" rel="stylesheet">    <!-- jsTree -->
+    <link href="{% static 'listings/assets/plugins/codeprettifier/prettify.css' %}" type="text/css" rel="stylesheet">                <!-- Code Prettifier -->
+    <link href="{% static 'listings/assets/plugins/iCheck/skins/minimal/blue.css' %}" type="text/css" rel="stylesheet">              <!-- iCheck -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
+    <!--[if lt IE 9]>
+        <link href="{% static 'listings/assets/css/ie8.css' %}" type="text/css" rel="stylesheet">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'listings/assets/plugins/charts-flot/excanvas.min.js' %}"></script>
+        <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js' %}"></script>
+    <![endif]-->
+    <!-- The following CSS are included as plugins and can be removed if unused-->
+
+    <link href="{% static 'listings/assets/plugins/form-daterangepicker/daterangepicker-bs3.css' %}" type="text/css" rel="stylesheet">    	<!-- DateRangePicker -->
+    <link href="{% static 'listings/assets/plugins/switchery/switchery.css' %}" type="text/css" rel="stylesheet">        					<!-- Switchery -->
+    <link href="{% static 'listings/assets/plugins/fullcalendar/fullcalendar.css' %}" type="text/css" rel="stylesheet"> 						<!-- FullCalendar -->
+
+    <link href="{% static 'listings/css/site.css' %}" type="text/css" rel="stylesheet">
+
+    {% block css %}
+
+    {% endblock %}
+</head>
+
+<body class="infobar-offcanvas">
+
+<div id="headerbar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 col-sm-2">
+                <a href="#" class="shortcut-tiles tiles-brown">
+                    <div class="tiles-body">
+                        <div class="pull-left"><i class="fa fa-pencil"></i></div>
+                    </div>
+                    <div class="tiles-footer">
+                        Create Post
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+                <a href="#" class="shortcut-tiles tiles-grape">
+                    <div class="tiles-body">
+                        <div class="pull-left"><i class="fa fa-group"></i></div>
+                        <div class="pull-right"><span class="badge">2</span></div>
+                    </div>
+                    <div class="tiles-footer">
+                        Contacts
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+                <a href="#" class="shortcut-tiles tiles-primary">
+                    <div class="tiles-body">
+                        <div class="pull-left"><i class="fa fa-envelope-o"></i></div>
+                        <div class="pull-right"><span class="badge">10</span></div>
+                    </div>
+                    <div class="tiles-footer">
+                        Messages
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+                <a href="#" class="shortcut-tiles tiles-inverse">
+                    <div class="tiles-body">
+                        <div class="pull-left"><i class="fa fa-camera"></i></div>
+                        <div class="pull-right"><span class="badge">3</span></div>
+                    </div>
+                    <div class="tiles-footer">
+                        Gallery
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-sm-2">
+                <a href="#" class="shortcut-tiles tiles-midnightblue">
+                    <div class="tiles-body">
+                        <div class="pull-left"><i class="fa fa-cog"></i></div>
+                    </div>
+                    <div class="tiles-footer">
+                        Settings
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+                <a href="#" class="shortcut-tiles tiles-orange">
+                    <div class="tiles-body">
+                        <div class="pull-left"><i class="fa fa-wrench"></i></div>
+                    </div>
+                    <div class="tiles-footer">
+                        Plugins
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<header id="topnav" class="navbar navbar-default navbar-fixed-top clearfix" role="banner">
+
+
+<a id="leftmenu-trigger" class="" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"></a>
+
+<div class="yamm navbar-left navbar-collapse collapse in">
+    <ul class="nav navbar-nav">
+        <li><a href="/listings/"><strong>Frontend</strong></a></li>
+    </ul>
+</div>
+
+<ul class="nav navbar-nav toolbar pull-right">
+<li class="dropdown">
+    <a href="#" id="navbar-links-toggle" data-toggle="collapse" data-target="header>.navbar-collapse">&nbsp;</a>
+</li>
+
+<li class="toolbar-icon-bg demo-headerdrop-hidden">
+    <a href="#" id="headerbardropdown"><span class="icon-bg"><i class="fa fa-fw fa-level-down"></i></span></a>
+</li>
+
+<li class="dropdown toolbar-icon-bg demo-search-hidden mr5">
+    <a href="#" class="dropdown-toggle tooltips" data-toggle="dropdown"><span class="icon-bg"><i class="fa fa-fw fa-search"></i></span></a>
+
+    <div class="dropdown-menu arrow search dropdown-menu-form">
+        <div class="dd-header">
+            <span>Search</span>
+            <span><a href="#">Advanced search</a></span>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="">
+					
+					<span class="input-group-btn">
+						
+						<a class="btn btn-primary" href="#">Search</a>
+					</span>
+        </div>
+    </div>
+</li>
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle username" data-toggle="dropdown">
+        <span class="hidden-xs">{{ user.first_name }}</span>
+        <img class="img-circle" src="{% static 'listings/assets/demo/avatar/avatar_06.png' %}" alt="Dangerfield" />
+
+    </a>
+    <ul class="dropdown-menu userinfo">
+        <li><a href="#"><span class="pull-left">Edit Profile</span> <i class="pull-right fa fa-pencil"></i></a></li>
+        <li><a href="#"><span class="pull-left">Account Settings</span> <i class="pull-right fa fa-cogs"></i></a></li>
+        <li><a href="#"><span class="pull-left">Help</span> <i class="pull-right fa fa-question-circle"></i></a></li>
+        <li class="divider"></li>
+        <li><a href="#"><span class="pull-left">Earnings</span> <i class="pull-right fa fa-money"></i></a></li>
+        <li><a href="#"><span class="pull-left">Statement</span> <i class="pull-right fa fa-file-o"></i></a></li>
+        <li><a href="#"><span class="pull-left">Withdrawals</span> <i class="pull-right fa fa-credit-card"></i></a></li>
+        <li class="divider"></li>
+        <li><a href="/listings/signout/"><span class="pull-left">Sign Out</span> <i class="pull-right fa fa-sign-out"></i></a></li>
+    </ul>
+</li>
+
+</ul>
+
+</header>
+
+<div id="wrapper">
+<div id="layout-static">
+<div class="static-sidebar-wrapper sidebar-inverse">
+<div class="static-sidebar">
+<div class="sidebar">
+
+
+<div class="widget stay-on-collapse">
+    <div class="widget-body welcome-box tabular">
+        <div class="tabular-row">
+            <div class="tabular-cell welcome-avatar">
+                <a href="#"><img src="{% static 'listings/assets/demo/avatar/avatar_06.png' %}" class="avatar"></a>
+            </div>
+            <div class="tabular-cell welcome-options">
+                <span class="welcome-text">Welcome,</span>
+                <a href="#" class="name">{{ me.first_name }} {{ me.last_name }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="widget stay-on-collapse" id="widget-sidebar">
+    <span class="widget-heading">Explore</span>
+    <nav role="navigation" class="widget-body">
+        <ul class="acc-menu">
+            <li><a href="index.html"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
+            <li><a href="/listings/myposts/view/"><i class="fa fa-pencil"></i><span>My Posts</span><span class="badge badge-dark">{{ num_of_posts }}</span></a></li>
+            <li><a href="javascript:;"><i class="fa fa-flask"></i><span>Base UI</span></a>
+                <ul class="acc-menu">
+                    <li><a href="ui-typography.html">Typography</a></li>
+                    <li><a href="ui-buttons.html">Buttons</a></li>
+                    <li><a href="ui-tables.html">Tables</a></li>
+                    <li><a href="ui-forms.html">Forms</a></li>
+                    <li><a href="ui-images.html">Images</a></li>
+                    <li><a href="ui-panels.html">Panels</a></li>
+                    <li><a href="ui-icons.html">Font Icons</a></li>
+                    <li><a href="ui-helpers.html">Helpers</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-cogs"></i><span>BS Components</span><span class="label label-primary">BS</span></a>
+                <ul class="acc-menu">
+                    <li><a href="ui-modals.html">Modal Box</a></li>
+                    <li><a href="ui-progress.html">Progress Bars</a></li>
+                    <li><a href="ui-paginations.html">Pagers &amp; Paginations</a></li>
+                    <li><a href="ui-breadcrumbs.html">Breadcrumbs</a></li>
+                    <li><a href="ui-labelsbadges.html">Labels &amp; Badges</a></li>
+                    <li><a href="ui-alerts.html">Alerts &amp; Notificiations</a></li>
+                    <li><a href="ui-tabs.html">Tabs &amp; Accordions</a></li>
+                    <li><a href="ui-navbars.html">Navbars</a></li>
+                    <li><a href="ui-carousel.html">Carousel</a></li>
+                    <li><a href="ui-wells.html">Wells</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-random"></i><span>Custom Components</span></a>
+                <ul class="acc-menu">
+                    <li><a href="ui-tiles.html">Tiles</a></li>
+                    <li><a href="custom-skylo.html">Page Progress Bar</a></li>
+                    <li><a href="custom-bootbox.html">Bootbox</a></li>
+                    <li><a href="custom-datepaginator.html">Date Paginator</a></li>
+                    <li><a href="custom-pines.html">Pines Notification</a></li>
+                    <li><a href="custom-notific8.html">Notific8 Notification</a></li>
+                    <li><a href="custom-pulsate.html">Pulsating Elements</a></li>
+                    <li><a href="custom-knob.html">jQuery Knob</a></li>
+                    <li><a href="custom-jqueryui.html">jQueryUI Widgets</a></li>
+                    <li><a href="custom-ionrange.html">Ion Range Slider</a></li>
+                    <li><a href="custom-tour.html">Tour</a></li>
+                    <li><a href="ui-nestable.html">Nestable Lists</a></li>
+                    <li><a href="custom-jstree.html">Tree View</a></li>
+                    <li><a href="custom-weather.html">Weather</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-pencil"></i><span>Advanced Forms</span></a>
+                <ul class="acc-menu">
+                    <li><a href="form-components.html">Form Components</a></li>
+                    <li><a href="form-pickers.html">Pickers</a></li>
+                    <li><a href="form-wizard.html">Form Wizard</a></li>
+                    <li><a href="form-validation.html">Form Validation</a></li>
+                    <li><a href="form-masks.html">Form Masks</a></li>
+                    <li><a href="form-dropzone.html">Dropzone Uploader</a></li>
+                    <li><a href="form-ckeditor.html">CKEditor</a></li>
+                    <li><a href="form-summernote.html">Summernote</a></li>
+                    <li><a href="form-markdown.html">Markdown Editor</a></li>
+                    <li><a href="form-xeditable.html">Inline Editor</a></li>
+                    <li><a href="form-imagecrop.html">Image Cropping</a></li>
+                    <li><a href="form-gridforms.html">Grid Forms</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-table"></i><span>Advanced Tables</span></a>
+                <ul class="acc-menu">
+                    <li><a href="tables-responsive.html">Responsive Tables</a></li>
+                    <li><a href="tables-editable.html">Editable Tables</a></li>
+                    <li><a href="tables-data.html">Data Tables</a></li>
+                    <li><a href="tables-advanceddatatable.html">Advanced Data Tables</a></li>
+                    <li><a href="tables-fixedheader.html">Fixed Header Tables</a></li>
+                </ul>
+            </li>
+            <li><a href="ui-advancedpanels.html"><i class="fa fa-cog fa-spin"></i><span>Advanced Panels</span><span class="label label-alizarin">HOT!</span></a></li>
+            <li><a href="javascript:;"><i class="fa fa-bar-chart-o"></i><span>Analytics</span></a>
+                <ul class="acc-menu">
+                    <li><a href="charts-flot.html">Flot</a></li>
+                    <li><a href="charts-sparklines.html">Sparklines</a></li>
+                    <li><a href="charts-morris.html">Morris.js</a></li>
+                    <li><a href="charts-chart.html">Chart.js</a></li>
+                    <li><a href="charts-easypiechart.html">Easy Pie Chart</a></li>
+                    <li><a href="charts-nvd3.html">nvd3 <span class="label label-info">New</span></a></li>
+                    <li><a href="charts-gantt.html">Gantt Chart</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-map-marker"></i><span>Maps</span></a>
+                <ul class="acc-menu">
+                    <li><a href="maps-google.html">Google Maps</a></li>
+                    <li><a href="maps-vector.html">Vector Maps</a></li>
+                    <li><a href="maps-mapael.html">Mapael</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-files-o"></i><span>Pages</span></a>
+                <ul class="acc-menu">
+                    <li><a href="extras-messages.html">Messages</a></li>
+                    <li><a href="extras-profile.html">Profile</a></li>
+                    <li><a href="extras-calendar.html">Calendar</a></li>
+                    <li><a href="extras-timeline.html">Timeline</a></li>
+                    <li><a href="extras-search.html">Search Page</a></li>
+                    <li><a href="extras-chatroom.html">Chat Room</a></li>
+                    <li><a href="extras-invoice.html">Invoice</a></li>
+                    <li><a href="javascript:;">Responsive Email Template</a>
+                        <ul class="acc-menu">
+                            <li><a href="responsive-email/basic.html">Basic</a></li>
+                            <li><a href="responsive-email/hero.html">Hero</a></li>
+                            <li><a href="responsive-email/sidebar.html">Sidebar</a></li>
+                            <li><a href="responsive-email/sidebar-hero.html">Sidebar Hero</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="extras-gallery.html">Gallery</a></li>
+                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-briefcase"></i><span>Extras</span></a>
+                <ul class="acc-menu">
+                    <li><a href="extras-pricingtable.html">Pricing Tables</a></li>
+                    <li><a href="extras-faq.html">FAQ</a></li>
+                    <li><a href="extras-registration.html">Registration</a></li>
+                    <li><a href="extras-forgotpassword.html">Password Reset</a></li>
+                    <li><a href="extras-login.html">Login</a></li>
+                    <li><a href="extras-404.html">404 Page</a></li>
+                    <li><a href="extras-500.html">500 Page</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-sitemap"></i><span>Multiple Level Menu</span><span class="badge badge-dark">99</span></a>
+                <ul class="acc-menu">
+                    <li><a href="javascript:;">Menu Item 1</a></li>
+                    <li><a href="javascript:;">Menu Item 2</a>
+                        <ul class="acc-menu">
+                            <li><a href="javascript:;">Menu Item 2.1</a></li>
+                            <li><a href="javascript:;">Menu Item 2.2</a>
+                                <ul class="acc-menu">
+                                    <li><a href="javascript:;">Menu Item 2.2.1</a></li>
+                                    <li><a href="javascript:;">Menu Item 2.2.2</a>
+                                        <ul class="acc-menu">
+                                            <li><a href="javascript:;">And deeper yet!</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="disabled-link"><a href="index.html">Disabled Menu Item</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<div class="widget stay-on-collapse">
+    <div class="widget-heading">Functional Apps</div>
+    <nav class="widget-body">
+        <ul class="acc-menu">
+            <li><a href="app-inbox.html"><i class="fa fa-inbox"></i><span>Inbox</span><span class="badge badge-success">3</span></a></li>
+            <li><a href="app-tasks.html"><i class="fa fa-tasks"></i><span>Tasks</span><span class="badge badge-info">7</span></a></li>
+            <li><a href="app-notes.html"><i class="fa fa-pencil-square-o"></i><span>Notes</span></a></li>
+            <li><a href="app-todo.html"><i class="fa fa-check"></i><span>Todo</span><span class="badge badge-dark">10</span></a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="widget stay-on-collapse">
+    <div class="widget-heading">Templates</div>
+    <nav class="widget-body">
+        <ul class="acc-menu">
+            <li><a href="javascript:;"><i class="fa fa-coffee"></i><span>Blog</span></a>
+                <ul class="acc-menu">
+                    <li><a href="app-blog-dashboard.html">Dashboard</a></li>
+                    <li><a href="app-blog-page-list.html">Page List</a></li>
+                    <li><a href="app-blog-edit.html">Page Edit</a></li>
+                    <li><a href="app-blog-comment.html">Comment Moderation</a></li>
+                    <li><a href="javascript:;">Blog Front</a>
+                        <ul class="acc-menu">
+                            <li><a href="app-blogfront-list.html">Blog Page</a></li>
+                            <li><a href="app-blogfront-page.html">Blog Post</a></li>
+                            <li><a href="app-blogfront-column.html">Blog Column</a></li>
+                            <li><a href="app-blogfront-portfolio.html">Porfolio</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </li>
+            <li><a href="javascript:;"><i class="fa fa-shopping-cart"></i><span>eCommerce</span></a>
+                <ul class="acc-menu">
+                    <li><a href="app-ecommerce-dashboard.html">Dashboard</a></li>
+                    <!-- <li><a href="app-ecommerce-order-list.html">Order List</a></li>
+                    <li><a href="app-ecommerce-order-details.html">Order Details</a></li> -->
+                    <li><a href="app-ecommerce-product-list.html">Product List</a></li>
+                    <li><a href="app-ecommerce-product-edit.html">Product Edit</a></li>
+                    <li><a href="javascript:;">Store Front</a>
+                        <ul class="acc-menu">
+                            <li><a href="app-store-product-list.html">Product List</a></li>
+                            <!-- <li><a href="app-store-product-column.html">Product Column</a></li> -->
+                            <li><a href="app-store-product-details.html">Product Details</a></li>
+                            <li><a href="app-store-shoppingcart.html">Shopping Cart</a></li>
+                            <li><a href="app-store-checkout.html">Checkout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+</div>
+</div>
+</div>
+<div class="static-content-wrapper">
+    <div class="static-content">
+        <div class="page-content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <footer role="contentinfo">
+            <div class="clearfix">
+                <ul class="list-unstyled list-inline pull-left">
+                    <li><h6 class="no-maring">Rosetti Listings</h6></li>
+                </ul>
+                <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="fa fa-arrow-up"></i></button>
+            </div>
+        </footer>
+    </div>
+</div>
+</div>
+
+
+<div class="infobar-wrapper">
+<div class="infobar">
+
+<div class="infobar-options">
+    <h2>Infobar</h2>
+</div>
+
+<div id="widgetarea">
+
+
+<div class="widget" id="widget-sparkline">
+    <div class="widget-heading">
+        <a href="javascript:;" data-toggle="collapse" data-target="#sparklinestats"><h4>Sparkline Stats</h4></a>
+    </div>
+    <div class="widget-body collapse in" id="sparklinestats">
+        <ul class="sparklinestats">
+            <li>
+                <div class="pull-left">
+                    <h5 class="title">Total Revenue</h5>
+                    <h3>$241,750 <span class="badge badge-success">+13.6%</span></h3>
+                </div>
+                <div class="pull-right">
+                    <div class="sparkline" id="infobar-revenuestats"></div>
+                </div>
+            </li>
+            <li>
+                <div class="pull-left">
+                    <h5 class="title">Products Sold</h5>
+                    <h3>11,562 <span class="badge badge-success">+19.2%</span></h3>
+                </div>
+                <div class="pull-right">
+                    <div class="sparkline" id="infobar-unitssold"></div>
+                </div>
+            </li>
+            <li>
+                <div class="pull-left">
+                    <h5 class="title">Total Orders</h5>
+                    <h3>1,249 <span class="badge badge-danger">-10.5%</span></h3>
+                </div>
+                <div class="pull-right">
+                    <div class="sparkline" id="infobar-orders"></div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<div class="widget" id="widget-weather">
+    <div class="widget-heading">
+        <a href="javascript:;" data-toggle="collapse" data-target="#weatherwidget"><h4>Weather</h4></a>
+    </div>
+    <div class="widget-body collapse in" id="weatherwidget">
+        <div class="weather-container">
+            <div class="weather-widget"></div>
+        </div>
+    </div>
+</div>
+
+<div class="widget">
+    <div class="widget-heading">
+        <a href="javascript:;" data-toggle="collapse" data-target="#recentactivity"><h4>Recent Activity</h4></a>
+    </div>
+    <div class="widget-body collapse in" id="recentactivity">
+        <ul class="recent-activities">
+            <li>
+                <div class="avatar">
+                    <img src="{% static 'listings/assets/demo/avatar/avatar_11.png' %}" class="img-responsive img-circle">
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Jean Alanis</a> invited 3 unconfirmed members to <a href="#">Sed ut perspiciatis unde</a></span>
+                    <span class="time">Sep 16, 2014 at 10:06 AM</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="activityicon activity-success">
+                    <i class="fa fa-cloud"></i>
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Stacy Villani</a> and <a href="#" class="person">Leroy Greenlee</a> added new files to <a href="#">Dicta sunt explicabo</a></span>
+                    <span class="time">Sep 12, 2014 at 11:06 PM</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="avatar">
+                    <img src="{% static 'listings/assets/demo/avatar/avatar_07.png' %}" class="img-responsive img-circle">
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Shannon Schmucker</a> is now following <a href="#" class="person">Anthony Ware</a></span>
+                    <span class="time">Sep 06, 2014 at 1:46 AM</span>
+                </div>
+            </li>
+            <li>
+                <div class="avatar">
+                    <img src="{% static 'listings/assets/demo/avatar/avatar_01.png' %}" class="img-responsive img-circle">
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Roxann Hollingworth</a> commented on <a href="#">Natus error sit voluptatem</a></span>
+                    <span class="time">Sep 02, 2014 at 7:50 PM</span>
+                </div>
+            </li>
+            <li>
+                <div class="avatar">
+                    <img src="{% static 'listings/assets/demo/avatar/avatar_04.png' %}" class="img-responsive img-circle">
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Mitchell Kosak</a> added <a href="#" class="person">Bruce Ory</a> to <a href="#">Accusantium doloremque laudantium</a></span>
+                    <span class="time">Sep 02, 2014 at 8:35 AM</span>
+                </div>
+            </li>
+            <li>
+                <div class="activityicon activity-inverse">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#">4 new users</a> requested to join group</span>
+                    <span class="time">Aug 29, 2014 at 05:34 PM</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="avatar">
+                    <img src="{% static 'listings/assets/demo/avatar/avatar_09.png' %}" class="img-responsive img-circle">
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Rodney Moody</a> created new thread <a href="#">Vero eos et accusamus</a></span>
+                    <span class="time">Aug 13, 2014 at 1:23 PM</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="activityicon activity-info">
+                    <i class="fa fa-comment-o"></i>
+                </div>
+                <div class="content">
+                    <span class="msg">Anonymous user commented on <a href="#">Totam rem aperiam</a></span>
+                    <span class="time">Aug 11, 2014 at 12:01 PM</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="avatar">
+                    <img src="{% static 'listings/assets/demo/avatar/avatar_05.png' %}" class="img-responsive img-circle">
+                </div>
+                <div class="content">
+                    <span class="msg"><a href="#" class="person">Pricilla Panella</a> is now following <a href="#" class="person">Ricky Marengo</a></span>
+                    <span class="time">Jul 25, 2014 at 3:11 PM</span>
+                </div>
+            </li>
+            <li class="seeall">
+                <a href="#" class="pull-right">See all activities</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<!-- Load site level scripts -->
+
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> -->
+
+<script src="{% static 'listings/assets/js/jquery-1.10.2.min.js' %}"></script> 							<!-- Load jQuery -->
+<script src="{% static 'listings/assets/js/jqueryui-1.9.2.min.js' %}"></script> 							<!-- Load jQueryUI -->
+<script src="{% static 'listings/assets/js/bootstrap.min.js' %}"></script> 								<!-- Load Bootstrap -->
+
+<script src="{% static 'listings/assets/plugins/sparklines/jquery.sparklines.min.js' %}"></script>  		<!-- Sparkline -->
+<script src="{% static 'listings/assets/plugins/jstree/dist/jstree.min.js' %}"></script>  				<!-- jsTree -->
+
+<script src="{% static 'listings/assets/plugins/codeprettifier/prettify.js' %}"></script> 				<!-- Code Prettifier  -->
+<script src="{% static 'listings/assets/plugins/bootstrap-switch/bootstrap-switch.js' %}"></script> 		<!-- Swith/Toggle Button -->
+
+<script src="{% static 'listings/assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js' %}"></script>  <!-- Bootstrap Tabdrop -->
+
+<script src="{% static 'listings/assets/plugins/iCheck/icheck.min.js' %}"></script>     					<!-- iCheck -->
+
+<script src="{% static 'listings/assets/js/enquire.min.js' %}"></script> 									<!-- Enquire for Responsiveness -->
+
+<script src="{% static 'listings/assets/plugins/bootbox/bootbox.js' %}"></script>							<!-- Bootbox -->
+
+<script src="assets/plugins/simpleWeather/jquery.simpleWeather.min.js' %}"></script> <!-- Weather plugin-->
+
+<script src="{% static 'listings/assets/js/application.js' %}"></script>
+<script src="{% static 'listings/assets/demo/demo.js' %}"></script>
+<script src="{% static 'listings/assets/demo/demo-switcher.js' %}"></script>
+
+
+{% block js %}
+
+{% endblock %}
+<!-- End loading page level scripts-->
+
+</body>
+</html>

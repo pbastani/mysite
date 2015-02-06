@@ -1,0 +1,46 @@
+{% extends 'listings/admin/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="page-heading">
+        <h1 class="pull-left">My Post</h1>
+        <div class="pull-right">
+            <a href="/listings/myposts/edit/0/" class="btn btn-primary-alt"><i class="fa fa-plus"></i> Post</a>
+        </div>
+    </div>
+
+    {% if posts.count > 0 %}
+        <table class="table table-bordered mb0 table-hover" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="post-table-col center-text">Status</th>
+                <th class="post-table-col center-text">Manage</th>
+                <th>Title</th>
+                <th class="post-table-col center-text">Post Date</th>
+                <th class="post-table-col center-text">Expiry Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr class="{{ post.is_active|yesno:'info,danger' }}">
+                    <td style="width: 100px; text-align: center;">{{ post.is_active|yesno:'Active,Inactive' }}</td>
+                    <td style="width: 100px; text-align: center;">
+                        <a href="/listings/myposts/edit/{{ post.id }}" class="col-md-4" title="Edit"><i class="fa fa-pencil"></i></a>
+                        <a href="/listings/myposts/renew/{{ post.id }}" class="col-md-4" title="Renew"><i class="fa fa-refresh"></i></a>
+                        <a href="/listings/myposts/delete/{{ post.id }}" class="col-md-4" title="Delete"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                    <td><a href="/listings/myposts/view/{{ post.id }}">{{ post.title }}</a></td>
+                    <td class="center-text">{{ post.create_date|date:"M. d, Y" }}</td>
+                    <td class="center-text">{{ post.expiry_date|date:"M. d, Y" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            <p>You have no posts. <strong><a herf="/listings/myposts/edit/0/">Add a post</a></strong>.</p>
+        </div>
+    {% endif %}
+
+{% endblock %}
